@@ -1,0 +1,89 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0004-create-sitting-posts
+      author: dogster
+      changes:
+        - createTable:
+            tableName: sitting_posts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: pet_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: title
+                  type: varchar(120)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: latitude
+                  type: double precision
+                  constraints:
+                    nullable: false
+              - column:
+                  name: longitude
+                  type: double precision
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: assigned_sitter_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            baseTableName: sitting_posts
+            baseColumnNames: owner_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_sitting_posts_owner
+        - addForeignKeyConstraint:
+            baseTableName: sitting_posts
+            baseColumnNames: pet_id
+            referencedTableName: pets
+            referencedColumnNames: id
+            constraintName: fk_sitting_posts_pet
+        - addForeignKeyConstraint:
+            baseTableName: sitting_posts
+            baseColumnNames: assigned_sitter_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_sitting_posts_assigned_sitter
+        - createIndex:
+            tableName: sitting_posts
+            indexName: idx_sitting_posts_owner_id
+            columns:
+              - column:
+                  name: owner_id
+        - createIndex:
+            tableName: sitting_posts
+            indexName: idx_sitting_posts_pet_id
+            columns:
+              - column:
+                  name: pet_id
+        - createIndex:
+            tableName: sitting_posts
+            indexName: idx_sitting_posts_status
+            columns:
+              - column:
+                  name: status

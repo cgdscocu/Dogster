@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:dogster_${random.uuid};MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.yaml
+
+dogster:
+  storage:
+    root-dir: target/test-uploads/dogster

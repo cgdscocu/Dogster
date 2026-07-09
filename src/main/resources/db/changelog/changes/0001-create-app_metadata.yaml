@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0001-create-app-metadata
+      author: dogster
+      changes:
+        - createTable:
+            tableName: app_metadata
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(80)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: value
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+

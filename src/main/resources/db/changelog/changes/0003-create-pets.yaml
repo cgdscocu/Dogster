@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0003-create-pets
+      author: dogster
+      changes:
+        - createTable:
+            tableName: pets
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: owner_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(80)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_path
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: pets
+            baseColumnNames: owner_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_pets_owner
+        - createIndex:
+            tableName: pets
+            indexName: idx_pets_owner_id
+            columns:
+              - column:
+                  name: owner_id

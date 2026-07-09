@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: dogster-postgres
+    command: ["postgres", "-c", "port=5433"]
+    ports:
+      - "5433:5433"
+    environment:
+      POSTGRES_DB: dogster
+      POSTGRES_USER: dogster
+      POSTGRES_PASSWORD: dogster
+    volumes:
+      - dogster-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  dogster-postgres-data:

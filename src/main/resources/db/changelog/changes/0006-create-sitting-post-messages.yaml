@@ -1,0 +1,53 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0006-create-sitting-post-messages
+      author: dogster
+      changes:
+        - createTable:
+            tableName: sitting_post_messages
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sitting_post_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sender_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: content
+                  type: varchar(1000)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: sent_at
+                  type: timestamp with time zone
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseTableName: sitting_post_messages
+            baseColumnNames: sitting_post_id
+            referencedTableName: sitting_posts
+            referencedColumnNames: id
+            constraintName: fk_sitting_post_messages_post
+        - addForeignKeyConstraint:
+            baseTableName: sitting_post_messages
+            baseColumnNames: sender_id
+            referencedTableName: users
+            referencedColumnNames: id
+            constraintName: fk_sitting_post_messages_sender
+        - createIndex:
+            tableName: sitting_post_messages
+            indexName: idx_sitting_post_messages_post_id
+            columns:
+              - column:
+                  name: sitting_post_id

@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0005-drop-sitting-post-title
+      author: dogster
+      changes:
+        - dropColumn:
+            tableName: sitting_posts
+            columnName: title
