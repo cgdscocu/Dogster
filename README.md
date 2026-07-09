@@ -1,39 +1,39 @@
 # Dogster
 
-Pet owner ve pet sitter'ları buluşturan mobil odaklı bir pet sitting uygulaması. Spring Boot backend ve Flutter mobil client içerir.
+A mobile-focused pet sitting application that connects pet owners with pet sitters. Includes a Spring Boot backend and a Flutter mobile client.
 
-## Özellikler
+## Features
 
-- Kullanıcı kaydı ve e-posta doğrulama
-- Pet profili ve fotoğraf yükleme
-- Sitting post oluşturma, listeleme ve eşleşme
-- Konuma göre yakın ilan arama
-- Eşleşen kullanıcılar arasında WebSocket mesajlaşma
+- User registration and email verification
+- Pet profile creation with photo upload
+- Sitting post creation, listing, and matching
+- Location-based nearby post search
+- WebSocket messaging between matched users
 
-## Teknolojiler
+## Tech Stack
 
 **Backend:** Java 21, Spring Boot 3.5, Spring Data JPA, PostgreSQL, Liquibase, WebSocket/STOMP
 
 **Mobile:** Flutter
 
-**Altyapı:** Docker Compose
+**Infrastructure:** Docker Compose
 
-## Gereksinimler
+## Requirements
 
 - JDK 21
 - Maven
 - Docker
-- Flutter SDK (mobil client için)
+- Flutter SDK (for the mobile client)
 
-## Kurulum
+## Setup
 
-PostgreSQL'i başlatın:
+Start PostgreSQL:
 
 ```bash
 docker compose up -d
 ```
 
-Backend'i çalıştırın:
+Run the backend:
 
 ```bash
 ./mvnw spring-boot:run
@@ -45,40 +45,40 @@ Windows:
 .\mvnw.cmd spring-boot:run
 ```
 
-API varsayılan olarak `http://localhost:8080` adresinde çalışır.
+The API runs on `http://localhost:8080` by default.
 
-## Mobil client
+## Mobile client
 
 ```bash
 cd mobile
 flutter run
 ```
 
-Android emülatörde backend adresi: `http://10.0.2.2:8080`
+On the Android emulator, the backend is reachable at `http://10.0.2.2:8080`.
 
-Fiziksel cihaz veya özel URL için:
+For a physical device or a custom URL:
 
 ```bash
 flutter run --dart-define=DOGSTER_API_BASE_URL=http://<host>:8080 --dart-define=DOGSTER_WS_URL=ws://<host>:8080/ws
 ```
 
-## Testler
+## Tests
 
 ```bash
 ./mvnw test
 ```
 
-PostgreSQL ile entegrasyon testi (Docker gerekir):
+PostgreSQL integration test (requires Docker):
 
 ```bash
 ./mvnw -Dtest=PostgresLiquibaseIT test
 ```
 
-## Proje yapısı
+## Project structure
 
 ```text
 .
 ├── src/           # Spring Boot backend
-├── mobile/        # Flutter uygulaması
+├── mobile/        # Flutter application
 └── docker-compose.yml
 ```
